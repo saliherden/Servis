@@ -8596,11 +8596,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Salih ERDEN\\Documents\\Visual Studio Core\\ServisimApi\\ServisimApi\\ServisimApi.csproj",
+      "projectUniqueName": "C:\\Users\\Salih ERDEN\\Documents\\GitHub\\Servis\\ServisApi\\ServisimApi\\ServisimApi.csproj",
       "projectName": "ServisimApi",
-      "projectPath": "C:\\Users\\Salih ERDEN\\Documents\\Visual Studio Core\\ServisimApi\\ServisimApi\\ServisimApi.csproj",
+      "projectPath": "C:\\Users\\Salih ERDEN\\Documents\\GitHub\\Servis\\ServisApi\\ServisimApi\\ServisimApi.csproj",
       "packagesPath": "C:\\Users\\Salih ERDEN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Salih ERDEN\\Documents\\Visual Studio Core\\ServisimApi\\ServisimApi\\obj\\",
+      "outputPath": "C:\\Users\\Salih ERDEN\\Documents\\GitHub\\Servis\\ServisApi\\ServisimApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

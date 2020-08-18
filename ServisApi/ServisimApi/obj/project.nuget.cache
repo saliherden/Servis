@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3oX27fAplYdhfyRzxLbNYwD2aVlkhpwt9W57sSh1MWvUpPmaRpAcRXi49aM/M2p+lbRrLncExkuw5pUn7bs5Pg==",
+  "dgSpecHash": "bWSY5TN3PDXYAxH2D248lhJlHHAoIzqu+i5PxiVFjWoCqgko+PMQVBf0VoRH8wM818hqJWJU09xhNW58m7iPVg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Salih ERDEN\\Documents\\Visual Studio Core\\ServisimApi\\ServisimApi\\ServisimApi.csproj",
+  "projectFilePath": "C:\\Users\\Salih ERDEN\\Documents\\GitHub\\Servis\\ServisApi\\ServisimApi\\ServisimApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Salih ERDEN\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Salih ERDEN\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
