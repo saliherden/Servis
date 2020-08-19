@@ -177,7 +177,7 @@ namespace ServisimApi.Controllers
         [HttpPost("RotaSaatlerigetir/")]
         public async Task<ActionResult<RotaSaatleri>> getRotaSaatleri(Kullanicilar kullanicilar)
         {
-            var rotaDuraklari = await _context.RotaSaatleri.Where(x => x.FirmaId == kullanicilar.FirmaId && x.KategoriId == kullanicilar.KategoriId).ToListAsync();
+            var rotaDuraklari = await _context.RotaSaatleri.Where(x => x.FirmaId == kullanicilar.FirmaId /*&& x.KategoriId == kullanicilar.KategoriId*/).ToListAsync();
             List<RotaSaatleriTimeString> son = new List<RotaSaatleriTimeString>();
             //TimeSpan suan = DateTime.Now.TimeOfDay;
             //TimeSpan duraksaati;
