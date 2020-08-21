@@ -6,15 +6,18 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ServisimApi.Models;
+using ServisimApi.Services;
 
 namespace ServisimApi.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class WebApiController : ControllerBase
@@ -22,9 +25,12 @@ namespace ServisimApi.Controllers
 
         private readonly ServisContext _context;
 
-        public WebApiController(ServisContext context)
+        private IUserService _userService;
+
+        public WebApiController(ServisContext context, IUserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         #region Kullanici
@@ -62,10 +68,18 @@ namespace ServisimApi.Controllers
             return CreatedAtAction("GetKullanicilar", new { id = kullanicilar.Id }, kullanicilar);
         }
 
+        [AllowAnonymous]
         [HttpPost("Kullanici/Login")] //Kayıt olma güncelleme
         public async Task<ActionResult<Kullanicilar>> kLogin(KullaniciLoginPostModel kullanicilar)
         {
             var kullanici = await _context.Kullanicilar.FirstOrDefaultAsync(x => x.Username == kullanicilar.Username && x.Password == kullanicilar.Password);
+
+            var response = _userService.AuthenticateUser(kullanici);
+
+            if (response == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+            
 
             if (kullanici != null)
             {
@@ -83,6 +97,7 @@ namespace ServisimApi.Controllers
                 kullanici1.DeviceId = kullanici.DeviceId;
                 kullanici1.FirmaId = kullanici.FirmaId;
                 kullanici1.versions= await VersionCheckAsync(kullanicilar.Device, kullanicilar.Version);
+                kullanici1.Token = response.Token;
 
                 return Ok(kullanici1);
             }
@@ -92,6 +107,7 @@ namespace ServisimApi.Controllers
         }
 
         // GET: api/webapi/Duraklar/1 = 1=firmaid
+        [Authorize]
         [HttpPost("Duraklarigetir")]
         public async Task<ActionResult<RotaDuraklariTimeString>> GetRotaDuraklari(DuraklariGetirModel duraklariGetir)
         {
@@ -174,6 +190,7 @@ namespace ServisimApi.Controllers
 
         }
 
+        [Authorize]
         [HttpPost("RotaSaatlerigetir/")]
         public async Task<ActionResult<RotaSaatleri>> getRotaSaatleri(Kullanicilar kullanicilar)
         {
@@ -208,7 +225,7 @@ namespace ServisimApi.Controllers
         }
 
 
-
+        [Authorize]
         [HttpPost("SeyahatAL/")]
         public async Task<ActionResult<Seyahatler>> Seyahatal(Seyahatler seyahatler)
         {
@@ -277,7 +294,7 @@ namespace ServisimApi.Controllers
             return Ok(seyahatler);
         }
 
-
+        [Authorize]
         [HttpPost("SeyahatListele/")]
         public async Task<ActionResult<Seyahatler>> Seyahatler(Seyahatler seyahatler)
         {
@@ -321,7 +338,7 @@ namespace ServisimApi.Controllers
             return Ok(seyahatlerdizi);
         }
 
-
+        [Authorize]
         [HttpPost("SeyahatIptali/")]
         public async Task<ActionResult<Seyahatler>> SeyahatIptal(Seyahatler seyahatler)
         {
@@ -349,8 +366,8 @@ namespace ServisimApi.Controllers
             await _context.SaveChangesAsync();
             return Ok(seyahat);
         }
-        
 
+        [Authorize]
         [HttpPost("AraciTakipet/")]
         public async Task<ActionResult<RotaAraci>>rotaAraci(RotaAraciPostModel araci)
         {
@@ -371,7 +388,7 @@ namespace ServisimApi.Controllers
             }
             return Ok(suruculer);
         }
-
+        [Authorize]
         [HttpPost("KullaniciDeviceID")]
         public async Task<ActionResult<Kullanicilar>> kDeviceid(Kullanicilar kullanicilar)
         {
@@ -397,7 +414,7 @@ namespace ServisimApi.Controllers
 
             
         }
-
+        [Authorize]
         [HttpPost("Kullanici/Servisaraclari")]
         public async Task<ActionResult<RotaAraci>> servisaraci(PostModelServisler rotaAraci)
         {
@@ -423,7 +440,7 @@ namespace ServisimApi.Controllers
 
             return Ok(servisler);
         }
-
+        [Authorize]
         [HttpPost("Kullanici/Bindi")]
         public async Task<ActionResult<Kullanicilar>> kBindi(PostModelKullaniciBindi post)
         {
@@ -438,7 +455,7 @@ namespace ServisimApi.Controllers
             return Ok(new {mesaj="Bindi durumu başarı ile gerçekleşti" });
 
         }
-        
+        [Authorize]
         [HttpPost("Kullanici/Indi")]
         public async Task<ActionResult<Kullanicilar>> kindi(PostModelKullaniciBindi post)
         {
@@ -457,13 +474,19 @@ namespace ServisimApi.Controllers
 
 
         #region Surucu
+        [AllowAnonymous]
         [HttpPost("Surucu/Login")] //Kayıt olma güncelleme
         public async Task<ActionResult<Kullanicilar>> sLogin(SurucuLoginPostModel surucu)
         {
             var kullanici = await _context.Suruculer.FirstOrDefaultAsync(x => x.Username == surucu.Username && x.Password == surucu.Password);
             var arac = await _context.Araclar.FirstOrDefaultAsync(x => x.PlakaNo == surucu.AracPlaka);
 
-            
+            var response = _userService.AuthenticateSurucu(kullanici);
+
+            if (response == null)
+                return BadRequest(new { message = "Username or password is incorrect" });
+
+
 
 
             if (kullanici != null && arac!=null)
@@ -483,6 +506,7 @@ namespace ServisimApi.Controllers
                 don.UpdateDate = kullanici.UpdateDate;
                 don.AracID = arac.Id;
                 don.versions= await VersionCheckAsync(surucu.Device, surucu.Version);
+                don.Token = response.Token;
 
 
                 return Ok(don);
@@ -492,6 +516,7 @@ namespace ServisimApi.Controllers
             return StatusCode(403, new { mesaj= "Sürücü bulunamadı lütfen firmanız ile iletişime geçiniz." });
         }
 
+        [Authorize]
         [HttpPost("Surucu/RotaSaatlerigetir")]
         public async Task<ActionResult<RotaSaatleri>> getSrotaSaatleri(Suruculer kullanicilar)
         {
@@ -525,7 +550,7 @@ namespace ServisimApi.Controllers
             return Ok(son);
         }
 
-
+        [Authorize]
         [HttpPost("Surucu/Duraklarigetir")]
         public async Task<ActionResult<RotaDuraklariTimeString>> GetsSurucuRota(DuraklariGetirModel duraklariGetir)
         {
@@ -618,6 +643,7 @@ namespace ServisimApi.Controllers
 
         }
 
+        [Authorize]
         [HttpPost("Surucu/Rotacik")]
         public async Task<ActionResult<RotaAraci>> postRotaaraci(RotaAraci rotaAraci)
         {
@@ -629,6 +655,7 @@ namespace ServisimApi.Controllers
             return Ok(rotaAraci);
         }
 
+        [Authorize]
         [HttpPost("Surucu/DeviceID")]
         public async Task<ActionResult<RotaAraci>> postsurucudeviceid(Araclar araclar)
         {
@@ -643,6 +670,7 @@ namespace ServisimApi.Controllers
             return Ok(new {mesaj="Deviceid "+arac.PlakaNo+" araca başarı ile eklendi." });
         }
 
+        [Authorize]
         [HttpPost("Surucu/Gecmis")]
         public async Task<ActionResult<RotaAraci>> postSurucuGecmis(RotaAraci arac)
         {

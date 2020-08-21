@@ -15,6 +15,7 @@ namespace ServisimApi.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string DeviceId { get; set; }
+        public string Token { get; set; }
 
         public Versions versions { get; set; }
         public int? FirmaId { get; set; }

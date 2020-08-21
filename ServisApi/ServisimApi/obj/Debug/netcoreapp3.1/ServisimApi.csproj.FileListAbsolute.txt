@@ -285,8 +285,6 @@ C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\bin\Debug\net
 C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.csprojAssemblyReference.cache
 C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.AssemblyInfoInputs.cache
 C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.AssemblyInfo.cs
-C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.csproj.CoreCompileInputs.cache
-C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.RazorTargetAssemblyInfo.cache
 C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.csproj.CopyComplete
 C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\staticwebassets\ServisimApi.StaticWebAssets.Manifest.cache
@@ -294,3 +292,9 @@ C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\net
 C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.dll
 C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.pdb
 C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.genruntimeconfig.cache
+C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.csproj.CoreCompileInputs.cache
+C:\Users\Salih ERDEN\Documents\GitHub\Servis\ServisApi\ServisimApi\obj\Debug\netcoreapp3.1\ServisimApi.MvcApplicationPartsAssemblyInfo.cache
